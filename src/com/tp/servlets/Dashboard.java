@@ -21,12 +21,22 @@ public class Dashboard extends HttpServlet{
             return;
         }
 
+        String search = req.getParameter("name");
+
         Connection connection = Login.getDBConnection();
-        String query = "SELECT * FROM `users`";
+        String query = "SELECT * FROM `users` WHERE username like ?";
+
         PreparedStatement statement = null;
         ResultSet rs = null;
         try {
             statement = connection.prepareStatement(query);
+            if(search == null){
+                search = "";
+            }
+            search = "%" + search + "%";
+            statement.setString(1, search);
+
+
             rs = statement.executeQuery();
             req.setAttribute("users", rs);
         } catch (SQLException e) {

@@ -9,6 +9,6 @@ import java.io.IOException;
 public class Index extends HttpServlet{
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/login");
+        System.out.println("Index");
     }
 }
